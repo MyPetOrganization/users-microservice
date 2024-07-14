@@ -24,4 +24,8 @@ export class CreateUserDto {
     @IsString()
     @IsIn(['admin', 'buyer', 'seller'])
     public role: string;
+
+    @IsString()
+    @IsOptional()
+    public profileImage?: string;
 }

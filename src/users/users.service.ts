@@ -87,6 +87,8 @@ export class UsersService {
 
   async update(id: number, updateUserDto: UpdateUserDto, image?: Express.Multer.File) {
     const user = await this.findOne(id);
+    const { id: __, ...data} = updateUserDto;
+
     if (!user) {
       throw new Error('User not found');
     }
@@ -100,7 +102,7 @@ export class UsersService {
     }
 
     console.log("User Data: ", updateUserDto);
-    this.usersRepository.merge(user, updateUserDto);
+    this.usersRepository.merge(user, data);
     return await this.usersRepository.save(user);
   }
 
