@@ -1,6 +1,4 @@
-import { Delete } from "@nestjs/common";
-import { text } from "stream/consumers";
-import { BeforeInsert, Column, DeleteDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, DeleteDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('users')
 export class User {

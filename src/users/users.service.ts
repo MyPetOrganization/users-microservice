@@ -22,7 +22,6 @@ export class UsersService {
     if (image) {
       imageUrl = await this.uploadImageToFirebase(image);
     }
-    console.log("URL: ", imageUrl);
 
     createUserDto.password = await bcrypt.hash(createUserDto.password, salt);
     createUserDto.favoriteMovie = await bcrypt.hash(createUserDto.favoriteMovie, salt);
@@ -68,7 +67,7 @@ export class UsersService {
     if (isNaN(id)) {
       throw new Error('Invalid user ID');
     }
-    return this.usersRepository.findOneBy({id});
+    return await this.usersRepository.findOneBy({id});
   }
 
   async resetPassword(id: number, password: string, favoriteMovie: string) {

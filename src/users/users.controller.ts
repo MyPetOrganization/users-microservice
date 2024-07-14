@@ -1,6 +1,5 @@
 import { Controller, UploadedFile } from '@nestjs/common';
 import { UsersService } from './users.service';
-import { UpdateUserDto } from './dto/update-user.dto';
 import { MessagePattern, Payload } from '@nestjs/microservices';
 import { CreateUserPayload } from './payload/create-user-payload';
 import { Readable } from 'stream';
