@@ -26,15 +26,12 @@ export class User {
     @Column({ nullable: false})
     favoriteMovie: string;
 
-    @Column({ type: 'simple-array', nullable: true})
-    products: string[];
-
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP'})
     public createdAt: Date;
 
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP', onUpdate: 'CURRENT_TIMESTAMP'})
     public updatedAt: Date;
-
+                        
     @DeleteDateColumn()
     public deletedAt: Date;
 }

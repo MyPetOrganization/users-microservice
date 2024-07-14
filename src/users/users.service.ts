@@ -30,7 +30,6 @@ export class UsersService {
     const userData: User = {
       ...createUserDto,
       profileImage: imageUrl,
-      products: [],
       createdAt: undefined,
       updatedAt: undefined,
       deletedAt: undefined
