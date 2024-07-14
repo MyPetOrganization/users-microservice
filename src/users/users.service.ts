@@ -87,7 +87,6 @@ export class UsersService {
 
   async update(id: number, updateUserDto: UpdateUserDto, image?: Express.Multer.File) {
     const user = await this.findOne(id);
-    const { id: __, ...data} = updateUserDto;
 
     if (!user) {
       throw new Error('User not found');
@@ -100,8 +99,9 @@ export class UsersService {
       const salt = await bcrypt.genSalt(10);
       updateUserDto.password = await bcrypt.hash(updateUserDto.password, salt);
     }
-
-    console.log("User Data: ", updateUserDto);
+    
+    const { id: __, ...data} = updateUserDto;
+    
     this.usersRepository.merge(user, data);
     return await this.usersRepository.save(user);
   }
