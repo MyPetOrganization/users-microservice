@@ -17,19 +17,23 @@ export class UsersController {
   ) {
     const image = payload.image;
     const createUserDto = payload.createUserDto;
-    const imageBuffer = Buffer.from(image.buffer, 'base64');
-    const file: Express.Multer.File = {
-      buffer: imageBuffer,
-      originalname: image.originalname,
-      encoding: image.encoding,
-      mimetype: image.mimetype,
-      size: image.size,
-      fieldname: '',
-      stream: new Readable,
-      destination: '',
-      filename: '',
-      path: ''
-    };
+    let file: Express.Multer.File = null;
+    if (image) {
+      const imageBuffer = Buffer.from(image.buffer, 'base64');
+      file = {
+        buffer: imageBuffer,
+        originalname: image.originalname,
+        encoding: image.encoding,
+        mimetype: image.mimetype,
+        size: image.size,
+        fieldname: '',
+        stream: new Readable,
+        destination: '',
+        filename: '',
+        path: ''
+      };
+    }
+    
     return await this.usersService.create(createUserDto, file);
   }
 
@@ -56,20 +60,22 @@ export class UsersController {
     const image = payload.image;
     const updateUserDto = payload.updateUserDto;
     const id = payload.id;
-
-    const imageBuffer = Buffer.from(image.buffer, 'base64');
-    const file: Express.Multer.File = {
-      buffer: imageBuffer,
-      originalname: image.originalname,
-      encoding: image.encoding,
-      mimetype: image.mimetype,
-      size: image.size,
-      fieldname: '',
-      stream: new Readable,
-      destination: '',
-      filename: '',
-      path: ''
-    };
+    let file: Express.Multer.File
+    if (image){
+      const imageBuffer = Buffer.from(image.buffer, 'base64');
+      file = {
+        buffer: imageBuffer,
+        originalname: image.originalname,
+        encoding: image.encoding,
+        mimetype: image.mimetype,
+        size: image.size,
+        fieldname: '',
+        stream: new Readable,
+        destination: '',
+        filename: '',
+        path: ''
+      };
+    }
 
     return await this.usersService.update( id, updateUserDto, file);
   }
