@@ -17,7 +17,6 @@ export class UsersService {
 
   async create(createUserDto: CreateUserDto, image?: Express.Multer.File) {
     const salt = await bcrypt.genSalt(10);
-
     let imageUrl: string = null;
     if (image) {
       imageUrl = await this.uploadImageToFirebase(image);

@@ -1,9 +1,9 @@
 import { Controller, UploadedFile } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { MessagePattern, Payload } from '@nestjs/microservices';
-import { CreateUserPayload } from './payload/create-user-payload';
+import { CreateUserPayload } from './interfaces/create-user-payload';
 import { Readable } from 'stream';
-import { UpdateUserPayload } from './payload/update-user-payload';
+import { UpdateUserPayload } from './interfaces/update-user-payload';
 
 @Controller('users')
 export class UsersController {
@@ -79,7 +79,15 @@ export class UsersController {
 
     return await this.usersService.update( id, updateUserDto, file);
   }
-  
+
+  @MessagePattern({ cmd: 'get_user_by_email' })
+async findByEmail(@Payload() payload: { email: string }) {
+  const { email } = payload;
+
+  return await this.usersService.findOneByEmail(email);
+}
+
+
   // @Delete(':id')
   @MessagePattern({ cmd: 'delete_user' })
   async remove(@Payload('id') id: string) {
