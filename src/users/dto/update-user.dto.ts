@@ -1,6 +1,6 @@
 import { PartialType } from '@nestjs/mapped-types';
 import { CreateUserDto } from './create-user.dto';
-import { IsNumber, IsPositive, IsString, MinLength } from 'class-validator';
+import { IsNumber, IsPositive } from 'class-validator';
 
 /**
  * The Data Transfer Object (DTO) for updating a user

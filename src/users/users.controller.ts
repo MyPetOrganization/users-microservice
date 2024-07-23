@@ -1,4 +1,4 @@
-import { Controller, UploadedFile } from '@nestjs/common';
+import { Controller } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { MessagePattern, Payload } from '@nestjs/microservices';
 import { CreateUserPayload } from './interfaces/create-user-payload';
