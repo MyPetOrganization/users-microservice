@@ -59,7 +59,7 @@ export class UsersController {
    * @returns The user with the specified id
    */
   @MessagePattern({ cmd: 'get_one_user' })
-  async findOne(@Payload('id') id: string) {
+  async findOne(@Payload('id') id: number) {
     return await this.usersService.findOne(+id);
   }
 
