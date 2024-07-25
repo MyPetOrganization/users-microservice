@@ -1,4 +1,4 @@
-import { Controller } from '@nestjs/common';
+import { Controller, ParseIntPipe } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { MessagePattern, Payload } from '@nestjs/microservices';
 import { CreateUserPayload } from './interfaces/create-user-payload';
@@ -41,7 +41,9 @@ export class UsersController {
       };
     }
 
-    return await this.usersService.create(createUserDto, file);
+    const user = await this.usersService.create(createUserDto, file);
+    const { password, favoriteMovie, ...result } = user;
+    return result;
   }
 
   /**
@@ -59,10 +61,12 @@ export class UsersController {
    * @returns The user with the specified id
    */
   @MessagePattern({ cmd: 'get_one_user' })
-  async findOne(@Payload('id') id: number) {
-    return await this.usersService.findOne(+id);
+  async findOne(@Payload('id', ParseIntPipe) id: number) {
+    const user = await this.usersService.findOne(id);
+    const { password, favoriteMovie, ...result } = user;
+    return result;
   }
-
+  
   /**
    * Updates a user.
    * @param payload - The payload to update a user.
@@ -96,7 +100,9 @@ export class UsersController {
       };
     }
 
-    return await this.usersService.update(id, updateUserDto, file);
+    const user = await this.usersService.update(id, updateUserDto, file);
+    const { password, favoriteMovie, ...result } = user;
+    return result; 
   }
 
   /**
